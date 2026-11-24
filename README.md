@@ -1,0 +1,84 @@
+SyncPad | Real-Time Collaborative Editor
+SyncPad is a high-performance, real-time collaboration platform designed for developers and teams to sync code and notes instantaneously. Built with the MERN stack and WebSockets, it eliminates the lag of traditional document editing.
+Key Features
+ Real-Time Collaboration: Multi-user editing powered by Socket.io with zero-latency broadcasting.
+ Presence & Cursors: Visual indicators for active users and real-time cursor tracking.
+ Secure Workspace: JWT-based authentication with role-based access control (Owner vs. Viewer).
+ Intelligent Notifications: Real-time alerts for shared notes, updates, and chat messages.
+ version Control: Track changes and maintain history across collaborative sessions.
+ Integrated Chat: Discuss changes alongside your notes in a dedicated side-panel.
+
+Tech Stack
+Frontend
+React + Vite: For a lightning-fast development experience and optimized builds.
+Tailwind CSS: Utility-first styling for a sleek, modern UI.
+Socket.io-client: Managing persistent bidirectional communication.
+Lucide Icons & React Hot Toast: For intuitive UX and interactive feedback.
+
+Backend
+Node.js & Express: Scalable server-side logic and RESTful API endpoints.
+MongoDB & Mongoose: Flexible NoSQL schema for storing complex note structures.
+Socket.io: Handling the real-time event-driven architecture.
+JWT: Secure, stateless authentication flow.
+
+ Architecture & Flow
+Real-Time Sync Logic
+Emit: When User A types, a note-update event is emitted via WebSockets.
+Broadcast: The server receives the event and broadcasts the payload to all other clients in the same "Room" ID.
+Reflect: User B’s frontend receives the event and updates the local state without a page refresh.
+Project Structure
+Plaintext
+
+SyncPad
+├── client              # React + Vite Frontend
+│   ├── src
+│   │   ├── api         # Axios configurations
+│   │   ├── components  # Reusable UI (Editor, Chat, Nav)
+│   │   └── socket.js   # Socket.io initialization
+└── server              # Node.js + Express Backend
+    ├── controllers     # Business logic
+    ├── models          # MongoDB Schemas
+    ├── sockets         # WebSocket event handlers
+    └── routes          # API endpoints
+
+ Getting Started
+1. Clone & Install
+Bash
+git clone https://github.com/Gdibeg/SyncPad.git
+cd SyncPad
+
+# Install Server dependencies
+cd server && npm install
+
+# Install Client dependencies
+cd ../client && npm install
+2. Environment Setup
+Create a .env file in the server directory:
+
+Code snippet
+
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_super_secret_key
+3. Run the App
+Start Backend:
+
+Bash
+
+cd server
+npm run dev
+Start Frontend:
+
+Bash
+
+cd client
+npm run dev
+
+Roadmap
+ Rich Text Support: Implementing Quill or TipTap for Notion-like editing.
+
+ Conflict Resolution: Integrating CRDTs (Conflict-free Replicated Data Types) for better offline-to-online syncing.
+
+ File Attachments: Allowing users to upload images or PDFs directly into notes.
+
+ AI Assistant: Integration with LLMs for real-time note summarization.
