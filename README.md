@@ -1,84 +1,65 @@
-SyncPad | Real-Time Collaborative Editor
-SyncPad is a high-performance, real-time collaboration platform designed for developers and teams to sync code and notes instantaneously. Built with the MERN stack and WebSockets, it eliminates the lag of traditional document editing.
-Key Features
- Real-Time Collaboration: Multi-user editing powered by Socket.io with zero-latency broadcasting.
- Presence & Cursors: Visual indicators for active users and real-time cursor tracking.
- Secure Workspace: JWT-based authentication with role-based access control (Owner vs. Viewer).
- Intelligent Notifications: Real-time alerts for shared notes, updates, and chat messages.
- version Control: Track changes and maintain history across collaborative sessions.
- Integrated Chat: Discuss changes alongside your notes in a dedicated side-panel.
+# SyncPad
 
-Tech Stack
-Frontend
-React + Vite: For a lightning-fast development experience and optimized builds.
-Tailwind CSS: Utility-first styling for a sleek, modern UI.
-Socket.io-client: Managing persistent bidirectional communication.
-Lucide Icons & React Hot Toast: For intuitive UX and interactive feedback.
+SyncPad is a real-time collaborative workspace designed for developers and teams to write code and notes together instantaneously. Powered by WebSockets (Socket.io), React, Node.js, and MongoDB, it features live cursor tracking, multi-user document syncing, an integrated Monaco code editor, and AI assistance.
 
-Backend
-Node.js & Express: Scalable server-side logic and RESTful API endpoints.
-MongoDB & Mongoose: Flexible NoSQL schema for storing complex note structures.
-Socket.io: Handling the real-time event-driven architecture.
-JWT: Secure, stateless authentication flow.
+---
 
- Architecture & Flow
-Real-Time Sync Logic
-Emit: When User A types, a note-update event is emitted via WebSockets.
-Broadcast: The server receives the event and broadcasts the payload to all other clients in the same "Room" ID.
-Reflect: User B’s frontend receives the event and updates the local state without a page refresh.
-Project Structure
-Plaintext
+## Getting Started
 
-SyncPad
-├── client              # React + Vite Frontend
-│   ├── src
-│   │   ├── api         # Axios configurations
-│   │   ├── components  # Reusable UI (Editor, Chat, Nav)
-│   │   └── socket.js   # Socket.io initialization
-└── server              # Node.js + Express Backend
-    ├── controllers     # Business logic
-    ├── models          # MongoDB Schemas
-    ├── sockets         # WebSocket event handlers
-    └── routes          # API endpoints
+### 1. Prerequisites
+- **Node.js** (v18+ recommended)
+- **MongoDB** (local instance or MongoDB Atlas URI)
 
- Getting Started
-1. Clone & Install
-Bash
-git clone https://github.com/Gdibeg/SyncPad.git
+---
+
+### 2. Installation
+
+Clone the repository and install dependencies for both the frontend and backend:
+
+```bash
+# Clone repository
+git clone https://github.com/SamarthShettigar/SyncPad---Realtime_collaboration_platform.git
 cd SyncPad
 
-# Install Server dependencies
-cd server && npm install
+# Install frontend dependencies (in root)
+npm install
 
-# Install Client dependencies
-cd ../client && npm install
-2. Environment Setup
-Create a .env file in the server directory:
+# Install backend dependencies
+cd server
+npm install
+cd ..
+```
 
-Code snippet
+---
 
+### 3. Environment Setup
+
+Create a `.env` file in the root directory (or in `server/.env`):
+
+```env
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_super_secret_key
-3. Run the App
-Start Backend:
+JWT_SECRET=your_jwt_secret_key
 
-Bash
+# Optional (for AI Copilot & Summarizer features)
+GEMINI_API_KEY=your_gemini_api_key
+```
 
+---
+
+### 4. Running the Application
+
+Open two terminal windows:
+
+**Terminal 1 — Backend:**
+```bash
 cd server
 npm run dev
-Start Frontend:
+```
+*Backend runs on `http://localhost:5000`*
 
-Bash
-
-cd client
+**Terminal 2 — Frontend:**
+```bash
 npm run dev
-
-Roadmap
- Rich Text Support: Implementing Quill or TipTap for Notion-like editing.
-
- Conflict Resolution: Integrating CRDTs (Conflict-free Replicated Data Types) for better offline-to-online syncing.
-
- File Attachments: Allowing users to upload images or PDFs directly into notes.
-
- AI Assistant: Integration with LLMs for real-time note summarization.
+```
+*Frontend runs on `http://localhost:5173`*
